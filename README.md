@@ -4,8 +4,8 @@ A full-stack Kanban-style task management system built for BITS Pilani FSAD assi
 
 ## Live Demo
 
-- **Frontend**: *(Vercel URL — add after deployment)*
-- **Backend API**: *(Render URL — add after deployment)*
+- **Frontend**: https://taskboard-lza3dw8ub-shresth-1534s-projects.vercel.app
+- **Backend API**: https://taskboard-backend-prmq.onrender.com/api
 
 ### Default Accounts
 
