@@ -1,0 +1,302 @@
+import type { Task, User } from "../types";
+
+const TEACHER = {
+  id: "u1",
+  name: "Dr. Priya Sharma",
+  email: "teacher@demo.com",
+  role: "teacher" as const,
+};
+const STUDENT1 = {
+  id: "u2",
+  name: "Rahul Verma",
+  email: "student@demo.com",
+  role: "student" as const,
+  groupId: "G1",
+  semester: 3,
+};
+const STUDENT2 = {
+  id: "u4",
+  name: "Ananya Singh",
+  email: "ananya@demo.com",
+  role: "student" as const,
+  groupId: "G2",
+  semester: 5,
+};
+const STUDENT3 = {
+  id: "u5",
+  name: "Kiran Patel",
+  email: "kiran@demo.com",
+  role: "student" as const,
+  groupId: "G1",
+  semester: 3,
+};
+
+const daysAgo = (n: number) =>
+  new Date(Date.now() - 86400000 * n).toISOString();
+const daysAhead = (n: number) =>
+  new Date(Date.now() + 86400000 * n).toISOString();
+
+export const MOCK_TASKS: Task[] = [
+  // ── Assigned ──────────────────────────────────────────────────
+  {
+    id: "mock-1",
+    taskType: "assignment",
+    title: "Data Structures Assignment #3",
+    description:
+      "Implement a balanced BST with insert, delete, and search operations. Include time complexity analysis and test cases for edge inputs.",
+    status: "todo",
+    priority: "high",
+    dueDate: daysAgo(1),
+    subject: "Data Structures",
+    semester: 3,
+    tags: [],
+    maxMarks: 50,
+    createdBy: TEACHER,
+    assignedTo: STUDENT1,
+    createdAt: daysAgo(5),
+    updatedAt: daysAgo(5),
+  },
+  {
+    id: "mock-2",
+    taskType: "quiz",
+    title: "Operating Systems – Chapter 5 Quiz",
+    description:
+      "Topics: Process scheduling algorithms (FCFS, SJF, Round Robin, Priority). 20 MCQs in 30 minutes. No negative marking.",
+    quizLink: "https://forms.google.com/os-chapter5-quiz",
+    status: "todo",
+    priority: "medium",
+    dueDate: daysAhead(3),
+    subject: "Operating Systems",
+    semester: 5,
+    tags: [],
+    maxMarks: 20,
+    createdBy: TEACHER,
+    assignedTo: STUDENT2,
+    createdAt: daysAgo(2),
+    updatedAt: daysAgo(2),
+  },
+  {
+    id: "mock-3",
+    taskType: "assignment",
+    title: "DBMS – Normalisation Worksheet",
+    description:
+      "Convert given unnormalised relations to 1NF, 2NF, and 3NF. Show all functional dependencies at each step.",
+    status: "todo",
+    priority: "medium",
+    dueDate: daysAhead(5),
+    subject: "Database Management",
+    semester: 3,
+    tags: [],
+    maxMarks: 40,
+    createdBy: TEACHER,
+    assignedTo: STUDENT3,
+    createdAt: daysAgo(1),
+    updatedAt: daysAgo(1),
+  },
+
+  // ── In Progress ───────────────────────────────────────────────
+  {
+    id: "mock-4",
+    taskType: "project",
+    title: "Full Stack Web App – Final Project",
+    description:
+      "Build a full-stack application using React and Node.js with JWT auth, CRUD operations, and responsive UI. Deploy on Render/Vercel.",
+    status: "in-progress",
+    priority: "high",
+    dueDate: daysAgo(2),
+    subject: "Full Stack Development",
+    semester: 3,
+    tags: [],
+    maxMarks: 100,
+    assignedToGroup: "Group 1",
+    createdBy: TEACHER,
+    assignedTo: STUDENT1,
+    createdAt: daysAgo(14),
+    updatedAt: daysAgo(2),
+  },
+  {
+    id: "mock-5",
+    taskType: "assignment",
+    title: "Physics Lab Report – Pendulum Experiment",
+    description:
+      "Analyse pendulum motion data, calculate time period using T=2π√(L/g), compute percentage error, and discuss uncertainty sources.",
+    status: "in-progress",
+    priority: "medium",
+    dueDate: daysAhead(2),
+    subject: "Physics",
+    semester: 3,
+    tags: [],
+    maxMarks: 30,
+    createdBy: TEACHER,
+    assignedTo: STUDENT3,
+    createdAt: daysAgo(6),
+    updatedAt: daysAgo(1),
+  },
+
+  // ── Submitted ─────────────────────────────────────────────────
+  {
+    id: "mock-6",
+    taskType: "assignment",
+    title: "Database Design – ER Diagram",
+    description:
+      "Design a fully normalised ER diagram for the library management system scenario. Must be at least 3NF. Include cardinality constraints.",
+    status: "on-hold",
+    priority: "medium",
+    dueDate: daysAgo(3),
+    subject: "Database Management",
+    semester: 5,
+    tags: [],
+    maxMarks: 40,
+    submittedAt: daysAgo(1),
+    createdBy: TEACHER,
+    assignedTo: STUDENT2,
+    createdAt: daysAgo(10),
+    updatedAt: daysAgo(1),
+  },
+  {
+    id: "mock-7",
+    taskType: "presentation",
+    title: "Climate Change – Group Presentation",
+    description:
+      "Present the economic impact of climate change (10 min). Cite at least 5 peer-reviewed sources. Q&A session follows.",
+    status: "on-hold",
+    priority: "low",
+    dueDate: daysAgo(5),
+    subject: "Environmental Science",
+    semester: 5,
+    tags: [],
+    maxMarks: 50,
+    assignedToGroup: "Group 2",
+    submittedAt: daysAgo(2),
+    createdBy: TEACHER,
+    assignedTo: STUDENT3,
+    createdAt: daysAgo(15),
+    updatedAt: daysAgo(2),
+  },
+
+  // ── Under Review ──────────────────────────────────────────────
+  {
+    id: "mock-8",
+    taskType: "project",
+    title: "Machine Learning Mini Project",
+    description:
+      "Train a classification model on the provided dataset. Report accuracy, precision, recall, and F1-score. Include confusion matrix.",
+    status: "monitoring",
+    priority: "high",
+    dueDate: daysAgo(7),
+    subject: "Machine Learning",
+    semester: 3,
+    tags: [],
+    maxMarks: 100,
+    submittedAt: daysAgo(4),
+    createdBy: TEACHER,
+    assignedTo: STUDENT1,
+    createdAt: daysAgo(21),
+    updatedAt: daysAgo(4),
+  },
+
+  // ── Graded ────────────────────────────────────────────────────
+  {
+    id: "mock-9",
+    taskType: "presentation",
+    title: "Software Design Patterns – Presentation",
+    description:
+      "15-minute group presentation covering Creational, Structural, and Behavioural design patterns with real-world code examples.",
+    status: "done",
+    priority: "medium",
+    dueDate: daysAgo(10),
+    subject: "Software Engineering",
+    semester: 5,
+    tags: [],
+    maxMarks: 50,
+    grade: 44,
+    feedback:
+      "Excellent coverage of patterns! Factory method explanation was particularly strong. Minor overlap between Strategy and State patterns.",
+    assignedToGroup: "Group 2",
+    submittedAt: daysAgo(11),
+    gradedAt: daysAgo(8),
+    createdBy: TEACHER,
+    assignedTo: STUDENT2,
+    createdAt: daysAgo(28),
+    updatedAt: daysAgo(8),
+  },
+  {
+    id: "mock-10",
+    taskType: "assignment",
+    title: "Networking – Subnetting & CIDR Problems",
+    description:
+      "Solve 10 subnetting problems with full working. Express all answers in CIDR notation and calculate broadcast addresses.",
+    status: "done",
+    priority: "low",
+    dueDate: daysAgo(14),
+    subject: "Computer Networks",
+    semester: 3,
+    tags: [],
+    maxMarks: 30,
+    grade: 27,
+    feedback:
+      "Good work overall. Q7 had a minor CIDR calculation error but the rest was correct and well-presented.",
+    submittedAt: daysAgo(15),
+    gradedAt: daysAgo(12),
+    createdBy: TEACHER,
+    assignedTo: STUDENT1,
+    createdAt: daysAgo(32),
+    updatedAt: daysAgo(12),
+  },
+  {
+    id: "mock-11",
+    taskType: "quiz",
+    title: "Mathematics – Calculus Mid-Term Quiz",
+    description:
+      "Covers differentiation, integration (definite & indefinite), and applications. 15 questions, 45 minutes.",
+    quizLink: "https://forms.google.com/maths-calculus-quiz",
+    status: "done",
+    priority: "high",
+    dueDate: daysAgo(18),
+    subject: "Mathematics",
+    semester: 3,
+    tags: [],
+    maxMarks: 30,
+    grade: 28,
+    feedback: "Near perfect. Missed one integration by parts question.",
+    submittedAt: daysAgo(18),
+    gradedAt: daysAgo(16),
+    createdBy: TEACHER,
+    assignedTo: STUDENT3,
+    createdAt: daysAgo(25),
+    updatedAt: daysAgo(16),
+  },
+];
+
+export const MOCK_USERS: User[] = [
+  {
+    id: "u1",
+    name: "Dr. Priya Sharma",
+    email: "teacher@demo.com",
+    role: "teacher" as const,
+  },
+  {
+    id: "u2",
+    name: "Rahul Verma",
+    email: "student@demo.com",
+    role: "student" as const,
+  },
+  {
+    id: "u3",
+    name: "Admin Demo",
+    email: "admin@demo.com",
+    role: "admin" as const,
+  },
+  {
+    id: "u4",
+    name: "Ananya Singh",
+    email: "ananya@demo.com",
+    role: "student" as const,
+  },
+  {
+    id: "u5",
+    name: "Kiran Patel",
+    email: "kiran@demo.com",
+    role: "student" as const,
+  },
+];
