@@ -17,6 +17,8 @@ A full-stack Kanban-style task management system built for BITS Pilani FSAD assi
 
 > Or click **"Try Demo"** on the login page for instant access without signing up.
 
+> **Note:** The backend runs on Render's free tier and **spins down after 15 minutes of inactivity**. The first request after idle may take 30–60 seconds to respond. To warm it up before a demo, open the [health check URL](https://taskboard-backend-prmq.onrender.com/api/health) first.
+
 ## Features
 
 - **Kanban Board** — 5-column workflow: To Do → In Progress → On Hold → Monitoring → Done
