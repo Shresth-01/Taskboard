@@ -2,8 +2,10 @@ import axios from "axios";
 import { useAuthStore } from "../store/authStore";
 import type { Role } from "../types";
 
+const rawBase = (import.meta.env.VITE_API_URL ?? "/api").replace(/\/$/, "");
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? "/api",
+  baseURL: rawBase + "/",
 });
 
 api.interceptors.request.use((config) => {
@@ -25,26 +27,26 @@ api.interceptors.response.use(
 
 // Auth
 export const login = (email: string, password: string) =>
-  api.post("/auth/login", { email, password });
+  api.post("auth/login", { email, password });
 export const signup = (
   name: string,
   email: string,
   password: string,
   role: Role,
-) => api.post("/auth/signup", { name, email, password, role });
+) => api.post("auth/signup", { name, email, password, role });
 
 // Tasks
 export const getTasks = (params?: Record<string, string>) =>
-  api.get("/tasks", { params });
-export const createTask = (data: object) => api.post("/tasks", data);
+  api.get("tasks", { params });
+export const createTask = (data: object) => api.post("tasks", data);
 export const updateTask = (id: string, data: object) =>
-  api.put(`/tasks/${id}`, data);
+  api.put(`tasks/${id}`, data);
 export const updateTaskStatus = (id: string, status: string) =>
-  api.patch(`/tasks/${id}/status`, { status });
-export const deleteTask = (id: string) => api.delete(`/tasks/${id}`);
+  api.patch(`tasks/${id}/status`, { status });
+export const deleteTask = (id: string) => api.delete(`tasks/${id}`);
 
 // Users
-export const getUsers = () => api.get("/users");
-export const deleteUser = (id: string) => api.delete(`/users/${id}`);
+export const getUsers = () => api.get("users");
+export const deleteUser = (id: string) => api.delete(`users/${id}`);
 
 export default api;
